@@ -1,0 +1,49 @@
+html,body{
+	height:100%;
+	overflow-x:hidden;
+}
+h5{
+	font-family:Monotype Corsiva;
+}
+.list-group .list-group-item{
+	border-radius:0px;
+	background-color:transparent !important;
+	cursor:unset;
+	font-family:agency FB;
+	border:0px;
+}
+img{
+	border:15px solid black;
+	background:url(../assets/img/a.jpg)!important;
+	width:90%;
+	margin-left:-3%;
+	margin-top:30%;
+	border-radius:4px;
+	transform:skew(-10deg,-0deg);
+	box-shadow: 0 0 150px rgba(0,0,0,0.8);
+}
+sm{
+	border:1px solid black;
+	border-radius:4px;
+}
+.pnldef{
+	border-bottom:7px solid black;
+	border-top:1px solid black;
+	border-radius:4px;
+	width:50%;
+	box-shadow: 0 0 150px rgba(0,0,0,1);
+	transform:skew(55deg,-0deg);
+	-ms-transform:skew(55deg,0deg);
+	-webkit-transform:skew(55deg,0deg); 
+ 	width:90%;
+}
+.lft{
+	border-right:1px solid black;
+	border-left:7px solid black;	
+}
+.cmptr{
+	text-align:center;
+	transform: rotate(20deg);
+	-ms-transform:rotate(20deg);
+	-webkit-transform:rotate(20deg); 
+}
