@@ -1,24 +1,27 @@
 <?php
-include('login/session.php');
-include('session.php');
+include('../login/session.php');
+include('../session.php');
 ?>
 <html>
 <head>
 	<title>ADMIN</title>
-	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script src="assets/css/jquery.min.js"></script>
-	<link rel="stylesheet" href="assets/css/v.css">
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="../assets/css/v.css">
 </head>
 <body>
 	<div class="row affix-row">
-		<?php require('side.php');?>
+		<?php require('../side.php');?>
 		<div class="col-sm-9 col-md-10 affix-content">
 			<div class="container">
 				<div class="page-header">
 					<?php
 						$num_rec_per_page=5;
-						include('connection.php');
+						include('../connection.php');
 						$connection = new createConnection(); 			//created a new object
 						$connection->connectToDatabase();
 						$connection->selectDatabase();				//selecting db
@@ -42,7 +45,7 @@ include('session.php');
   						<div class="col-lg-5">
 							<div class="progress pull-right">
 								<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-									<a href="cancel.php" style="color:#fff;">CANCEL </a>
+									<a href="../cancel.php" style="color:#fff;">CANCEL </a>
 								</div>
 							</div>
 							<div class="panel panel-info">
@@ -105,10 +108,10 @@ include('session.php');
 								<div class="panel-body">
 								<h5 class="text-uppercase">instructions:</h5>
 									<div class="list-group text-capitalize">
-  										<li href="#" class="list-group-item ">TABLE MUST CONTAIN <b>ID</b> WHICH IS PKEY</li>
-  										<li href="#" class="list-group-item ">CLICK CLEAR BUTTON TO RESET FIELD</li>
-  										<li href="#" class="list-group-item ">MAKE SURE YOU HAVE ENTERED ALL FIELDS</li>
-  										<li href="#" class="list-group-item ">CLICK ADD ENTRIES TO FINISH</li>
+  										<li href="#" class="list-group-item ">Dapibus ac facilisis in</li>
+  										<li href="#" class="list-group-item ">Cras sit amet nibh libero</li>
+  										<li href="#" class="list-group-item ">Porta ac consectetur ac</li>
+  										<li href="#" class="list-group-item ">Vestibulum at eros</li>
 									</div>
 								</div>
 							</div>
@@ -118,6 +121,6 @@ include('session.php');
 			</div>
 		</div>
 	</div>
-	<script src="assets/js/bootstrap.js"></script>
+	<script src="../assets/js/bootstrap.js"></script>
 </body>
 </html>

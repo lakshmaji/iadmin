@@ -1,3 +1,13 @@
+/*
+Author lakshmaji
+version 1.0.0
+since   1.0.0
+access  public 
+@aqwire inno's
+
+*/
+
+
 html,body{
 	height:100%;
 	overflow-x:hidden;
@@ -14,7 +24,7 @@ h5{
 }
 img{
 	border:15px solid black;
-	background:url(../assets/img/a.jpg)!important;
+	background:url(../img/a.jpg)!important;
 	width:90%;
 	margin-left:-3%;
 	margin-top:30%;

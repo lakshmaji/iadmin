@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include('connection.php');
+include('../connection.php');
 $connection = new createConnection(); 			//created a new object
 $connection->connectToDatabase();
 $connection->selectDatabase();				//selecting db
@@ -31,11 +31,11 @@ echo "<script>
 		var r = confirm('ADDED NEW ENTRY SUCCESSFULLY!Do You Want To Add One More?');
     		if (r == true) 
 		{
-			window.location.assign('crtetbl.php');    
+			window.location.assign('index.php');    
 		} 
 		else 
 		{
-        		window.location.assign('index.php#section1');
+        		window.location.assign('../edit');
 	    	}
 	</script>";
 ?>

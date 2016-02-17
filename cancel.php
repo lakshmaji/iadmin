@@ -1,4 +1,4 @@
 <?php
-	unset($_SESSION["tblname"]);
-	header('Location:index.php#section1');
+unset($_SESSION["tblname"]); //session estblishedemnet
+header('Location:index.php');
 ?>

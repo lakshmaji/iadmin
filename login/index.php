@@ -10,8 +10,11 @@ else
 <html>
 <head>
 	<title>ADMIN</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="../assets/css/bootstrap.css">
-	<script src="../assets/css/jquery.min.js"></script>
+	<script src="../assets/js/jquery.min.js"></script>
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/login.css">
 </head>

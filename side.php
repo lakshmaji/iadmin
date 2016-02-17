@@ -22,7 +22,7 @@
 									</a>
 								</li>
 								<li><a href="#"><span class="glyphicon glyphicon-link"></span> View My WEBSITE</a></li>
-								<li><a href="login/logout.php"><span class="glyphicon glyphicon-off"></span> LOGOUT</a></li>
+								<li><a href="../login/logout.php"><span class="glyphicon glyphicon-off"></span> LOGOUT</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> HELP</a></li>
 							</ul>
 						</div><!--/.nav-collapse -->
