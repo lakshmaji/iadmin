@@ -1,5 +1,9 @@
 # admin  
 
+##availble version 
+ - [iadmin v 2.0.0](http://iadmin.lakshmaji.tk/sadmin/login/index.php)
+ - [iadmin v 1.0.0](http://iadmin.lakshmaji.tk/admin/login/)
+  
 Manage backend panel of your application.
 
 Advantages:
@@ -9,7 +13,10 @@ Advantages:
 - Esay to perform read,update,create and delete operations on any table that you want!.
 
 
-### [LIVE DEMO](http://iadmin.lakshmaji.tk/admin/login/)
+### LIVE DEMO 
+ - [iadmin v 2.0.0](http://iadmin.lakshmaji.tk/sadmin/login/index.php)
+ - [iadmin v 1.0.0](http://iadmin.lakshmaji.tk/admin/login/)
+
 
 
 ## Documentation[AVAILABLE HERE](http://iadmin.lakshmaji.tk/)
