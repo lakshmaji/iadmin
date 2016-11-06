@@ -51,7 +51,7 @@ a:hover{text-decoration:none;}
           		<span class="glyphicon glyphicon-leaf" style="font-size:2.5em"></span>
       		</a>
 		<a class="navbar-brand" href="#">
-          		<span><i style="font-size:8px;letter-spacing:5px">@lakshmaji ananth's</i><br> i ADMINSTRATOR</span>
+          		<span><i style="font-size:8px;letter-spacing:5px">@My App</i><br> i ADMINSTRATOR</span>
       		</a>
  	</div>
     	<div class="collapse navbar-collapse" id="myNavbar">
