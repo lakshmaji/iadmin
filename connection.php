@@ -5,7 +5,7 @@ class createConnection 				//create a class for make connection
     var $host="localhost";
     var $username="root";    			// specify the sever details for mysql
     Var $password="";
-    var $database="";
+    var $database="iadmin";
 
     var $myconn;
 
@@ -13,7 +13,7 @@ class createConnection 				//create a class for make connection
 
     function connectToDatabase() 		// create a function for connect database
     {
-        $conn= mysql_connect($this->host,$this->username,$this->password);
+        $conn= mysqli_connect($this->host,$this->username,$this->password, $this->database);
 
         if(!$conn)// testing the connection
         {

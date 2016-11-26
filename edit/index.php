@@ -104,8 +104,8 @@ table a:hover{background:aqua;text-decoration:none;}
 						$num_rec_per_page=5;
 						include('../connection.php');
 						$connection = new createConnection(); 			//created a new object
-						$connection->connectToDatabase();
-						$connection->selectDatabase();				//selecting db
+						$connection_ref = $connection->connectToDatabase();
+						// $connection->selectDatabase();				//selecting db
 						$selected_table_name=$_SESSION["tblname"];
 					?><br>
 					<button class="btn btn-success disabled text-uppercase"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $selected_table_name;?></button>
@@ -115,15 +115,15 @@ table a:hover{background:aqua;text-decoration:none;}
 						if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
 						$start_from = ($page-1) * $num_rec_per_page; 
 						$sql = "SELECT * FROM ".$selected_table_name." LIMIT $start_from, $num_rec_per_page"; 
-						$rs_result = mysql_query ($sql); //run the query
+						$rs_result = mysqli_query ($connection_ref, $sql); //run the query
 						if($rs_result === FALSE) 
 						{ 
-    							die(mysql_error()); // TODO: better error handling
+    							die(mysqli_error()); // TODO: better error handling
 						}
-						$num_fields=mysql_num_fields($rs_result);
+						$num_fields=mysqli_num_fields($rs_result);
 						if(isset($_GET['id'])) 
 						{
-   							@mysql_query("DELETE FROM ".$selected_table_name." WHERE id = '".$_GET['id']."'");
+   							@mysqli_query($connection_ref, "DELETE FROM ".$selected_table_name." WHERE id = '".$_GET['id']."'");
    							header("location:index.php");
    							exit();
 						}
@@ -146,17 +146,10 @@ table a:hover{background:aqua;text-decoration:none;}
 							</div>
 
 
-<?php
-if($selected_table_name=="achievements" || $selected_table_name=="courses" || $selected_table_name=="events" || $selected_table_name=="news" || $selected_table_name=="tutors" || $selected_table_name=="students" || $selected_table_name=="notices")
-{
 
-?>
 							<div class="btn-group" role="group" style="float:right;" aria-label="...">
 								<a href="../create" class="btn btn-primary">ADD</a>
 							</div>
-<?php
-}
-?>
 
 
 
@@ -171,13 +164,19 @@ if($selected_table_name=="achievements" || $selected_table_name=="courses" || $s
 								<tr>
 									<?php
 										$width=100/$num_fields;
-										for($y=0;$y<$num_fields;$y++)
-										{
-											echo "<th style='width:".$width."%'>".mysql_field_name($rs_result, $y)."</th>";
-										}
+										// for($y=0;$y<$num_fields;$y++)
+										// {
+											 $finfo = mysqli_fetch_fields($rs_result);
+											 foreach($finfo as $v){
+											 	$image_url = $v=="imageUrl"? true:false;
+												echo "<th style='width:".$width."%'>".$v->name."</th>";
+											 }
+											 
+											// echo "<th style='width:".$width."%'>".mysql_field_name($rs_result, $y)."</th>";
+										// }
 										echo "<th style='width:10%;'>action</th></tr></thead><tbody>";
 
-while($row=mysql_fetch_array($rs_result)) { 
+while($row=mysqli_fetch_array($rs_result)) { 
 //echo "<b color='red'>".$row[0]."</b>";
 ?> 
             <tr>
@@ -187,7 +186,7 @@ while($row=mysql_fetch_array($rs_result)) {
 			?>
             		<td >
 					<a data-toggle="modal" data-target="#myModal<?php echo $row[0];?>">
-						<?php if(mysql_field_name($rs_result, $l)=="imageUrl")
+						<?php if($image_url)
 											{
 											echo "<img src='".$row[$l]."' width='100px' height='100px'/>";												
 											}
@@ -281,8 +280,8 @@ echo "		<div id='ajaxDiv'></div>";
 
 							<?php 
 								$sql = "SELECT * FROM ".$selected_table_name; 
-								$rs_result = mysql_query($sql); //run the query
-								$total_records = mysql_num_rows($rs_result);  //count number of records
+								$rs_result = mysqli_query($connection_ref,$sql); //run the query
+								$total_records = mysqli_num_rows($rs_result);  //count number of records
 								$total_pages = ceil($total_records / $num_rec_per_page); 
 							?>
 							<button class="btn btn-warning disabled" type="button" style="background:#ec971f;"><?php echo $selected_table_name; ?> has <span class="badge"><?php echo $total_records; ?></span> entries</button>

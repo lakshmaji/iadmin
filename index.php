@@ -73,13 +73,13 @@ a:hover{text-decoration:none;}
 					<?php
 						include('connection.php');
 						$connection = new createConnection(); 			//created a new object
-						$connection->connectToDatabase();
-						$connection->selectDatabase();
-					   	$result = mysql_query('SHOW TABLES');
+						$connection_ref = $connection->connectToDatabase();
+						// $connection->selectDatabase();
+					   	$result = mysqli_query($connection_ref, 'SHOW TABLES');
    						if($result)
 						{
 							$break_line=0;
-							while($table = mysql_fetch_array($result))	// go through each row that was returned in $result 
+							while($table = mysqli_fetch_array($result))	// go through each row that was returned in $result 
 							{ 	
 								echo "<div class='col-md-4 win_by_lakshmaji' style='background-color:rgba(".rand(0,255).",".rand(0,255).",".rand(0,255).",1);'><a  href='choice.php?dummy=".base64_encode($table[0])."' class='text-uppercase win_by_lakshmaji' style='color:#fff;'>".$table[0]."</a></div>";
 								$break_line++;

@@ -23,8 +23,8 @@ include('../session.php');
 						$num_rec_per_page=5;
 						include('../connection.php');
 						$connection = new createConnection(); 			//created a new object
-						$connection->connectToDatabase();
-						$connection->selectDatabase();				//selecting db
+						$connection_ref = $connection->connectToDatabase();
+						// $connection->selectDatabase();				//selecting db
 						$selected_table_name=$_SESSION["tblname"];
 					?><br>
 					<button class="btn btn-success disabled text-uppercase"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $selected_table_name;?></button>
@@ -32,12 +32,12 @@ include('../session.php');
 				<p>
 					<?php
 						$sql = "SELECT * FROM ".$selected_table_name; 
-						$rs_result = mysql_query ($sql); //run the query
+						$rs_result = mysqli_query($connection_ref,$sql); //run the query
 						if($rs_result === FALSE) 
 						{ 
-							die(mysql_error()); // TODO: better error handling
+							die(mysqli_error()); // TODO: better error handling
 						}
-						$num_fields=mysql_num_fields($rs_result);
+						$num_fields=mysqli_num_fields($rs_result);
 						$_SESSION['num_flds']=$num_fields;
 						$skipid=0;
 					?>
@@ -61,7 +61,8 @@ include('../session.php');
 									</div>
 									<form action="crtinstbl.php" method="post">
 										<?php
-											while ($fieldinfo=mysql_fetch_field($rs_result))
+										$finfo = mysqli_fetch_fields($rs_result);
+											foreach ($finfo as $fieldinfo)
     											{
 												if($skipid==0)
 												{

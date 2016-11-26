@@ -3,8 +3,8 @@
 session_start();
 include('../connection.php');
 $connection = new createConnection(); 			//created a new object
-$connection->connectToDatabase();
-$connection->selectDatabase();				//selecting db
+$connection_ref = $connection->connectToDatabase();
+// $connection->selectDatabase();				//selecting db
 
 $num_fields=$_SESSION['num_flds'];
 $selected_table_name=$_SESSION["tblname"];
@@ -22,7 +22,7 @@ for($y=1;$y<$num_fields;$y++)
 }
 $str=$str.");";
 
-$re_result = mysql_query ($str); //run the query
+$re_result = mysqli_query ($connection_ref, $str); //run the query
 
 
 //echo "inserted successfully";

@@ -107,12 +107,12 @@ else
 					<form action="login.php" method="POST">
 						<div class="input-group">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
-							<input type="text" id="name" name="username" placeholder="username" class="form-control" >
+							<input type="text" id="name" name="username" placeholder="username" class="form-control"  value="admin">
 						</div>
 						<br>
 						<div class="input-group">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
-							<input type="password" id="password" name="password" placeholder="**********" class="form-control" >
+							<input type="password" id="password" name="password" placeholder="**********" class="form-control" value="admin" >
 						</div><br>
 						<div class="input-group">
 							<input type='submit' name='submit' class="btn btn-info "  value="LOGIN">
