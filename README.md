@@ -1,8 +1,7 @@
 # admin  
 
 ##availble version 
- - [iadmin v 2.0.0](http://iadmin.lakshmaji.tk/sadmin/login/index.php)
- - [iadmin v 1.0.0](http://iadmin.lakshmaji.tk/admin/login/)
+ - [iadmin v 3.0.0](http://v3.iadmin.ga/)
   
 Manage backend panel of your application.
 
@@ -14,12 +13,11 @@ Advantages:
 
 
 ### LIVE DEMO 
- - [iadmin v 2.0.0](http://iadmin.lakshmaji.tk/sadmin/login/index.php)
- - [iadmin v 1.0.0](http://iadmin.lakshmaji.tk/admin/login/)
+ - [iadmin v 3.0.0](http://v3.iadmin.ga)
 
 
 
-## Documentation[AVAILABLE HERE](http://iadmin.lakshmaji.tk/)
+## Documentation[AVAILABLE HERE](http://iadmin.ga)
 
 ### Dependencies
 - [Bootstrap](https://github.com/twbs/bootstrap)
