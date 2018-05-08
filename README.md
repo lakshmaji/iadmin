@@ -1,6 +1,14 @@
 # admin  
 
-# any PR would welcome :hatching_chick:  
+# Note :
+
+ -  Any new features or suggestion.
+     - We will add new features / improvements (just make a PR regarding feature or improvement)
+ -  Any PR's would welcome :hatching_chick:  
+ 
+ - Todo
+     - Admin Change Password 
+     - Profile Update
 
 ## availble version 
  - [iadmin v 3.0.0](http://v3.iadmin.ga/)
