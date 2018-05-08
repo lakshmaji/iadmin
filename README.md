@@ -7,6 +7,7 @@
  -  Any PR's would welcome :hatching_chick:  
  
  - Todo
+     - Update missing documentation
      - Admin Change Password 
      - Profile Update
 
