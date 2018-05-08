@@ -1,4 +1,4 @@
-# admin  
+# iadmin  
 
 # Note :
 
@@ -11,8 +11,8 @@
      - Admin Change Password 
      - Profile Update
 
-## availble version 
- - [iadmin v 3.0.0](http://v3.iadmin.ga/)
+## Availble version 
+ - iadmin v 3.0.0 ~~[iadmin v 3.0.0](http://v3.iadmin.ga/)~~
   
 Manage backend panel of your application.
 
@@ -24,11 +24,11 @@ Advantages:
 
 
 ### LIVE DEMO 
- - [iadmin v 3.0.0](http://v3.iadmin.ga)
+ - ~~[iadmin v 3.0.0](http://v3.iadmin.ga)~~
 
 
 
-## Documentation[AVAILABLE HERE](http://iadmin.ga)
+## Documentation ~~[AVAILABLE HERE](http://iadmin.ga)~~
 
 ### Dependencies
 - [Bootstrap](https://github.com/twbs/bootstrap)
