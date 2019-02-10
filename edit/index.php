@@ -172,12 +172,9 @@ table a:hover{background:aqua;text-decoration:none;}
 												echo "<th style='width:".$width."%'>".$v->name."</th>";
 											 }
 											 
-											// echo "<th style='width:".$width."%'>".mysql_field_name($rs_result, $y)."</th>";
-										// }
 										echo "<th style='width:10%;'>action</th></tr></thead><tbody>";
 
 while($row=mysqli_fetch_array($rs_result)) { 
-//echo "<b color='red'>".$row[0]."</b>";
 ?> 
             <tr>
 			<?php
@@ -210,7 +207,6 @@ echo "<td><a class='btn btn-danger' href='index.php?id=".$row[0]."'>delete</a></
     					<div class="modal-dialog modal-sm">
       					<div class="modal-content">
         						<div class="modal-body">
-		<?php //echo $row[$l]." ".$row[0];?>
 	      <p>
 		<form name='myForm'>
 		<input type="hidden" id="imp_ref_len" value="<?php echo $num_fields;?>">
@@ -223,7 +219,8 @@ if($w==0)
 continue;
 }
 				echo "<span class='glyphicon glyphicon-book'></span>";
-				echo "<textarea class='form-control nonepty'  id=".$w."  onchange='ajaxFunction(".$row[0].",this.value,".$w.");' >".$row[$l+$w]."</textarea>";	
+				echo "<textarea class='form-control nonepty'  id=".$w."  onchange='ajaxFunction(".$row[0].",this.value,".$w.");' >".$row[$w]."</textarea>";
+				// echo "<textarea class='form-control nonepty'>banan".$row[$w]."</textarea>";	
 echo "		<div id='ajaxDiv'></div>";
 		
 			}
