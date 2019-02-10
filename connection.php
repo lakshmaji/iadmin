@@ -4,7 +4,7 @@ class createConnection 				//create a class for make connection
 {
     var $host="localhost";
     var $username="root";    			// specify the sever details for mysql
-    Var $password="";
+    Var $password="tiger";
     var $database="iadmin";
 
     var $myconn;
@@ -35,9 +35,9 @@ class createConnection 				//create a class for make connection
 
     function selectDatabase() 			// selecting the database.
     {
-        mysql_select_db($this->database);  	//use php inbuild functions for select database
+        mysqli_select_db($this->myconn, $this->database);  	//use php inbuild functions for select database
 
-        if(mysql_error()) 			// if error occured display the error message
+        if(mysqli_error($this->myconn)) 			// if error occured display the error message
         {
 
             echo "Cannot find the database ".$this->database;
@@ -48,7 +48,7 @@ class createConnection 				//create a class for make connection
 
     function closeConnection() 			// close the connection
     {
-        mysql_close($this->myconn);
+        mysqli_close($this->myconn);
 
 						//        echo "Connection closed";
     }
