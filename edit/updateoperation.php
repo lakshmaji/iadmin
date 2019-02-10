@@ -21,23 +21,7 @@ $selected_table_name=$_SESSION["tblname"];
 $allsel="select * from ".$selected_table_name;
 $res = mysqli_query($connection_ref, $allsel);
 
-// $finfo = mysql_fetch_fields($res);
-
 $finfo = mysqli_fetch_field_direct( $res, $wcolumn);
-// var_dump($finfo);
-// die();
-// echo $wcolumn;
-// foreach ($finfo as $field)
-// {
-//    echo $field;
-
-// 	if ($field->name == $wcolumn) {
-		
-// 	}
-// }
-// die();
-
-// $fld_name=mysql_field_name($res, $wcolumn);
 $fld_name = $finfo->name;
 $sql = "UPDATE ".$selected_table_name." SET ".$fld_name."='".$wpm."' WHERE id=".$wrecord;
 
