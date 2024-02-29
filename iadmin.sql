@@ -20,6 +20,12 @@ SET time_zone = "+00:00";
 -- Database: `iadmin`
 --
 
+DROP DATABASE IF EXISTS iadmin;
+
+CREATE DATABASE IF NOT EXISTS iadmin;
+
+USE iadmin;
+
 -- --------------------------------------------------------
 
 --

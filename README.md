@@ -1,5 +1,25 @@
 # iadmin  
 
+Simple admin panel for developers.
+
+
+Manage backend database table records without have to building application from scratch. This application was written when I was grad. Reccently made few updates still this is not yet ready for production.
+
+
+### Using Docker (development only)
+
+```bash
+# Build and launch
+docker-compose up --build && docker-compose up
+
+# To rebuild and launch
+docker volume prune  && docker-compose up --build && docker-compose up
+
+# Generate sample data 
+cd scripts
+docker-compose -f docker-compose.seeds.yml up --build
+```
+
 # Note :
 
  -  Any new features or suggestion.
@@ -32,3 +52,8 @@ Advantages:
 
 ### Dependencies
 - [Bootstrap](https://github.com/twbs/bootstrap)
+
+
+```bash
+docker volume prune -y && docker-compose up --build && docker-compose up
+`` `
