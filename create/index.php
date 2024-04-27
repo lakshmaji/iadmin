@@ -102,7 +102,7 @@ include('../connection.php');
 					</div>
 				</div>
 				<?php
-					$sql = "SELECT * FROM ".$selected_table_name; 
+					$sql = "SELECT * FROM ".$selected_table_name." LIMIT 1"; 
 					$rs_result = mysqli_query($connection_ref,$sql); //run the query
 					if($rs_result === FALSE) 
 					{ 
@@ -116,7 +116,7 @@ include('../connection.php');
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="crtinstbl.php" method="post">
+                            <form action="crtinstbl.php" method="post">
 									<?php
 										$finfo = mysqli_fetch_fields($rs_result);
 										foreach ($finfo as $fieldinfo) {

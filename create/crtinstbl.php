@@ -32,7 +32,7 @@ echo "<script>
 		} 
 		else 
 		{
-        		window.location.assign('../edit');
+        		window.location.assign('../list');
 	    	}
 	</script>";
 ?>

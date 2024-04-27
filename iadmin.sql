@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `admin_log` (
   `username` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2  COMMENT="This is a current users table. Will be removed in future";
 
 --
 -- Dumping data for table `admin_log`
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `MapData` (
   `lattitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `longitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 COMMENT="This is a table with rich content";
 
 --
 -- Dumping data for table `MapData`
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `address` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14  COMMENT="This is a basic table";
 
 --
 -- Dumping data for table `test`

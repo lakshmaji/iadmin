@@ -1,7 +1,5 @@
 <?php
-
 ob_start();
-
 include('../login/session.php');
 include('../session.php');
 include('../connection.php');
@@ -29,9 +27,8 @@ include('../connection.php');
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-
 <body>
-    <!-- ============================================================== -->
+	<!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
     <div class="preloader">
@@ -40,17 +37,20 @@ include('../connection.php');
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
+
+	<!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <?php require('../header.php');?>
-        <?php require('../side.php');?>
+    <!-- ============================================================== -->
+		<?php require('../header.php');?>
         <!-- ============================================================== -->
+		<?php require('../side.php');?>
+		<!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
+			<!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <div class="page-breadcrumb">
@@ -61,7 +61,7 @@ include('../connection.php');
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="/" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Edit data in table</li>
                                 </ol>
                             </nav>
                         </div>
@@ -80,173 +80,111 @@ include('../connection.php');
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <!-- ============================================================== -->
+
+			<!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
                 <?php
-                    $num_rec_per_page=5;
-                    // include('../connection.php');
-                    $connection = new createConnection(); 			//created a new object
-                    $connection_ref = $connection->connectToDatabase();
-                    // $connection->selectDatabase();				//selecting db
-                    $selected_table_name=$_SESSION["tblname"];
-                ?>
+					$num_rec_per_page=5;
+					$connection = new createConnection(); 			//created a new object
+					$connection_ref = $connection->connectToDatabase();
+					// $connection->selectDatabase();				//selecting db
+					$selected_table_name=$_SESSION["tblname"];
+				?>
+				<div>
+					<h6>Edit data in <?php echo $selected_table_name;?> table</h6>
+					<div>
+						<div class="btn-list">
+                            <?php
+                                $previous = "javascript:history.go(-1)";
+                                if(isset($_SERVER['HTTP_REFERER'])) {
+                                    $previous = $_SERVER['HTTP_REFERER'];
+                                }                            
+                            ?>
+							<a href="<?= $previous ?>" type="button" class="btn waves-effect waves-light btn-secondary">Back</a>
+						</div>
+					</div>
+				</div>
                 <?php
-                    if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-                    $start_from = ($page-1) * $num_rec_per_page; 
-                    $sql = "SELECT * FROM ".$selected_table_name." LIMIT $start_from, $num_rec_per_page"; 
-                    $rs_result = mysqli_query ($connection_ref, $sql); //run the query
-                    if($rs_result === FALSE) 
-                    { 
-                            die(mysqli_error()); // TODO: better error handling
-                    }
-                    $num_fields=mysqli_num_fields($rs_result);
-                    if(isset($_GET['id'])) 
+                    if(isset($_SESSION["current_row_id"])) 
                     {
-                        @mysqli_query($connection_ref, "DELETE FROM ".$selected_table_name." WHERE id = '".$_GET['id']."'");
-                        header("location:index.php");
-                        exit();
-                    }
-                ?> 
-                <div class="row">
-                    <div class="col-9">
+                        $current_row_id = $_SESSION["current_row_id"];
 
-                    </div>
-                    <div class="col-3 ">
-                        <div class="float-right py-3">
-                            <a href="../create" role="button" class="btn waves-effect waves-light btn-primary">Add</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title"><?php echo $selected_table_name;?></h4>
-                                <h6 class="card-subtitle">Todo
-                                    <code>.table</code>-?.</h6>
-                                <h6 class="card-title mt-5"><i
-                                        class="mr-1 font-18 mdi mdi-numeric-1-box-multiple-outline"></i> <?php echo $selected_table_name;?></h6>
-                                <div class="table-responsive">
-                                    <table class="table table-hover ">
-                                        <thead class="">    
-                                            <tr class="border-0">
-                                                <?php
-                                                    $width=100/$num_fields;
-                                                    $finfo = mysqli_fetch_fields($rs_result);
-                                                    foreach($finfo as $v){
-                                                        $image_url = $v=="imageUrl"? true:false;
-                                                        echo "<th scope='col' class='border-0 font-14 font-weight-medium text-muted' style='width:".$width."%'>".$v->name."</th>";
-                                                    }
-                                            
-                                                    echo "<th class='border-0 font-14 font-weight-medium text-muted' scope='col' style='width:10%;'>action</th>"
-                                                ?>                                        
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                while($row=mysqli_fetch_array($rs_result)) { 
-                                            ?> 
-                                                <tr>
-                                                    <?php
-                                                        for($l=0;$l<$num_fields;$l++) {
-                                                    ?>
-                                                        <td>
-                                                            <a data-toggle="modal" data-target="#myModal<?php echo $row[0];?>">
-                                                                <?php 
-                                                                    if($image_url) {
-                                                                        echo "<img src='".$row[$l]."' width='100px' height='100px'/>";												
-                                                                    } else {
-                                                                        echo $row[$l];
-                                                                    }
-                                                                ?>
-                                                            </a>
-                                                        </td>
-                                                        <?php
-                                                            if($l== $num_fields-1){
-                                                                echo "<td><a class='btn btn-danger' href='index.php?id=".$row[0]."'>delete</a></td>";
-                                                            }
-                                                        ?>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                </tr>
-                                            <?php
-                                                }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                        $sql = "SELECT * FROM ".$selected_table_name." WHERE id =".$current_row_id; 
+                        $rs_result = mysqli_query($connection_ref,$sql); //run the query
+                        if($rs_result === FALSE) 
+                        { 
+                            die(mysqli_error()); // TODO: better error handling
+                        }
+                        $num_fields=mysqli_num_fields($rs_result);
+                        $_SESSION['num_flds']=$num_fields;
+                        // Fetch the data for the current record
+                        $row = mysqli_fetch_assoc($rs_result);
 
-
-							
-
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-                <?php 
-                    $sql = "SELECT * FROM ".$selected_table_name; 
-                    $rs_result = mysqli_query($connection_ref,$sql); //run the query
-                    $total_records = mysqli_num_rows($rs_result);  //count number of records
-                    $total_pages = ceil($total_records / $num_rec_per_page); 
+                        $skipid=0;
                 ?>
                 <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite">
-                            <?php echo $selected_table_name; ?> has <span class="badge"><?php echo $total_records; ?></span> entries
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-7" style="display:flex;justify-content:end;">
-                        <div class="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
-                            <ul class="pagination">
-                                <?php
-									echo "<li class='paginate_button page-item previous disabled' id='zero_config_previous'><a href='index.php?page=1' aria-controls='zero_config' data-dt-idx='0' tabindex='0' class='page-link'>Previous</a></li>"; // Goto 1st page
-                                ?>
-                                <!-- <li class="paginate_button page-item previous disabled" id="zero_config_previous">
-                                    <a href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                </li> -->
-                                <?php
-                                    for ($i=1; $i<=$total_pages; $i++)
-                                    { 
-                                        echo "<li class='paginate_button page-item " . ($page == $i ? 'active' : '') . "'><a href='index.php?page=".$i."' aria-controls='zero_config' data-dt-idx='1' tabindex='0' class='page-link'>".$i."</a></li> "; 
-                                    } 
-                                ?>
-                                <?php
-									echo "<li class='paginate_button page-item next' id='zero_config_next'><a href='index.php?page=$total_pages' aria-controls='zero_config' data-dt-idx='7' tabindex='0' class='page-link'>Last</a></li>"; // Goto last page
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<form action="updateoperation.php" method="post">
+									<?php
+										$finfo = mysqli_fetch_fields($rs_result);
+										foreach ($finfo as $fieldinfo) {
+											if($skipid==0) {
+												$skipid++;
+												continue;
+											}
+									?>
+                                        <span class="text-uppercase" style="font-weight:600!important;"><?php    printf("%s\n",$fieldinfo->name); ?></span>
+                                        </span>
+											<?php 
+												if(strval($fieldinfo->type)!= "BLOB" && strval($fieldinfo->type)!="blob") {
+											?>
+													<div class="input-group">
+														<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+														<input type="text" name="<?php echo $fieldinfo->name;?>" class="form-control" required value="<?php echo htmlspecialchars($row[$fieldinfo->name]); ?>">
+													</div>
+											<?php
+												} else {
+											?>
+													<span class="glyphicon glyphicon-book"></span>
+													<textarea name="<?php echo $fieldinfo->name;?>" class="form-control" rows="5" id="comment" required><?php echo $row[$fieldinfo->name]; ?></textarea>
+											<?php
+												}
+												$skipid++;
+												//echo $skipid;
+											?>
+											<!--sub class="label label-warning pull-right"><?php printf("max Length: %d\n",$fieldinfo->max_length);?></sub-->
+									<?php
+										}
+									?> 	
+									<input class="btn btn-info" type="submit" value="Update">
+									<input class="btn btn-warning" type="reset" value="Reset" > 
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+                <?php
+                    } else {
+                        echo "Entry not found";
+                    }
+                ?>
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-            <?php require('../footer.php');?>
+			<?php require('../footer.php');?>
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
+	</div>
+
+	
+	<!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- End Wrapper -->

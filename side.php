@@ -22,8 +22,8 @@ if($result)
                         <li class="nav-small-cap"><span class="hide-menu">Tables</span></li>
                         <?php
                             while($table = mysqli_fetch_array($result))	 {// go through each row that was returned in $result 
-                                echo "<li class='sidebar-item'> 
-                                    <a class='sidebar-link' href='../choice.php?dummy=".base64_encode($table[0])."' aria-expanded='false'>
+                                echo "<li class='sidebar-item" . ($table[0] === $_SESSION['tblname'] ? ' selected' : '') . "'> 
+                                    <a class='sidebar-link" . ($table[0] === $_SESSION['tblname'] ? ' active' : '') . "' href='../choice.php?dummy=".base64_encode($table[0])."' aria-expanded='false'>
                                         <i data-feather='grid' class='feather-icon'></i>
                                         <span class='hide-menu'>".$table[0]."</span>
                                     </a>
@@ -48,7 +48,7 @@ if($result)
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-<div class="col-sm-3 col-md-2 affix-sidebar" >
+        <div class="col-sm-3 col-md-2 affix-sidebar" >
 				<div class="sidebar-nav" >
 					<div class="navbar navbar-default" role="navigation" >
 						<div class="navbar-header">

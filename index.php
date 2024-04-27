@@ -1,6 +1,9 @@
 <?php
 require('login/session.php');
 include('connection.php');
+unset($_SESSION["tblname"]);
+unset($_SESSION['num_flds']);
+unset($_SESSION["current_row_id"]);
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +88,8 @@ include('connection.php');
 					$connection = new createConnection(); 			//created a new object
 					$connection_ref = $connection->connectToDatabase();
 					// $connection->selectDatabase();
-					$result = mysqli_query($connection_ref, 'SHOW TABLES');
+                    $sql = "SELECT table_name, table_rows, ENGINE, TABLE_COMMENT  FROM information_schema.tables WHERE table_schema = '".$_ENV['DB_DATABASE']."'";
+					$result = mysqli_query($connection_ref, $sql);
 					if($result) {
 				?>
 				<div class="row">
@@ -111,40 +115,45 @@ include('connection.php');
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted">Team Lead
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Table
                                                 </th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">Project
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">Description
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted">Team</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted text-center">
                                                     Status
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted text-center">
-                                                    Weeks
+                                                    Total Records
                                                 </th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">Budget</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											<?php
+                                                $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 												$break_line=0;
 												while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result 	
 											?>
 											<tr class='border-top-0 px-2 py-4'>
 												<td class="border-top-0 px-2 py-4">
                                                     <div class="d-flex no-block align-items-center">
-                                                        <div class="me-3"><img src="./assets/images/users/widget-table-pic1.jpg" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                        <div class="">
+                                                        <div class="me-3">
+                                                        <div class="rounded-circle d-flex justify-content-center align-items-center bg-<?php echo $colors[array_rand($colors)]; ?> text-white" style="width: 50px; height: 50px;">
+                                                                <span class="h5 m-0">
+                                                                    <?php echo strtoupper(substr($table[0], 0, 1));?>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pl-2">
                                                             <h5 class="text-dark mb-0 font-16 font-weight-medium">
-																<?php
-																	echo $table[0];
-																?>
+																<?php echo ucfirst($table[0]);?>
 															</h5>
-                                                            <span class="text-muted font-14">hgover@gmail.com</span>
+                                                            <span class="text-muted font-14"><?php echo $table[2] ?></span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="border-top-0 text-muted px-2 py-4 font-14">Elite Admin</td>
+                                                <td class="border-top-0 text-muted px-2 py-4 font-14"><?php echo $table[3] ?></td>
                                                 <td class="border-top-0 px-2 py-4">
                                                     <div class="popover-icon">
                                                         <a class="btn btn-primary rounded-circle btn-circle font-12" href="javascript:void(0)">DS</a>
@@ -155,12 +164,11 @@ include('connection.php');
                                                 </td>
                                                 <td class="border-top-0 text-center px-2 py-4"><i class="fa fa-circle text-primary font-12" data-bs-toggle="tooltip" data-placement="top" aria-label="In Testing" data-bs-original-title="In Testing"></i></td>
                                                 <td class="border-top-0 text-center font-weight-medium text-muted px-2 py-4">
-                                                    35
+                                                    <?php echo $table[1] ?>
                                                 </td>
                                                 <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
 													<?php
 														echo "<a href='choice.php?dummy=".base64_encode($table[0])."'>view</a>";
-														// echo "<pre>".var_dump($table)."</pre>";
 													?>
                                                 </td>
 											</tr>
