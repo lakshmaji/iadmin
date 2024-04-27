@@ -1,0 +1,18 @@
+.logo-icon {
+  margin-right: 0px;
+}
+.logo-icon > .dark-logo {
+  width: 70px;
+}
+
+.logo-icon > .light-logo {
+  width: 70px;
+}
+
+.logo-text > .dark-logo {
+  height: 50px;
+}
+
+.logo-text > .light-logo {
+  height: 50px;
+}

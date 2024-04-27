@@ -12,15 +12,17 @@ services:
       DB_USER: root
       DB_PASSWORD: root
       DB_DATABASE: iadmin
+    volumes:
+      - .:/var/www/html
 
   db:
     container_name: dbcontainer
-    platform: linux/x86_64
-    image: mysql:5.7
+    # platform: linux/x86_64
+    image: mysql:8.0.36
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: iadmin
-      MYSQL_USER: root
+      # MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
       - "3307:3306"
