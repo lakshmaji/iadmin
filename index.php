@@ -1,111 +1,231 @@
 <?php
 require('login/session.php');
+include('connection.php');
+unset($_SESSION["tblname"]);
+unset($_SESSION['num_flds']);
+unset($_SESSION["current_row_id"]);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="en">
+
 <head>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   	<title>i ADMIN</title>
-	<meta name="robots" content="noindex, nofollow">
-   	<meta name="author" content="lakshmaji"/>
-   	<link rel="publisher" href="http://lakshmaji.tk">
-  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-	<style>
-		html,body{width:100%;height:100%;}
-                .fix_nav{margin-top:10%;}
-		.win_by_lakshmaji{padding:3em 0em;text-align: center;margin:1.5em 1em;text-shadow:5px 5px 10px black;font-size:18px;}
-.wrapper{line-height:12;}
-
-
-
-
-
-
-a:hover{text-decoration:none;}
-
-
-	</style>
-
-
-
-
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+    <title>i ADMIN</title>
+    <!-- Custom CSS -->
+    <link href="./assets/css/style.min.css" rel="stylesheet">
+    <link href="./assets/css/custom.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background:#eeefc6">
-  	<div class="container-fluid">
-    	<div class="navbar-header">
-      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        		<span class="icon-bar"></span>
-        		<span class="icon-bar"></span>
-        		<span class="icon-bar"></span>                        
-      		</button>
-	      	<a class="navbar-brand" href="#">
-          		<span class="glyphicon glyphicon-leaf" style="font-size:2.5em"></span>
-      		</a>
-		<a class="navbar-brand" href="#">
-          		<span><i style="font-size:8px;letter-spacing:5px">@My App</i><br> i ADMINSTRATOR</span>
-      		</a>
- 	</div>
-    	<div class="collapse navbar-collapse" id="myNavbar">
-	      	<ul class="nav navbar-nav navbar-right">
-        		<li ><p style="margin-top:10%;">ADMINSTARTOR<br><i style="font-size:8px;letter-spacing:5px">lakshmaji inno's</i></p></li>
-        		<li><a href="login/logout.php"><span class="glyphicon glyphicon-off" style="font-size:2.5em"></span></a></li>
-      		</ul>
-    	</div>
-  	</div>
-</nav>
-  
-<div class="fix_nav">
-</div>
-<div class="container">
-<div class="row ">
-
-
-
-					<?php
-						include('connection.php');
-						$connection = new createConnection(); 			//created a new object
-						$connection_ref = $connection->connectToDatabase();
-						// $connection->selectDatabase();
-					   	$result = mysqli_query($connection_ref, 'SHOW TABLES');
-   						if($result)
-						{
-							$break_line=0;
-							while($table = mysqli_fetch_array($result))	// go through each row that was returned in $result 
-							{ 	
-								echo "<div class='col-md-4 win_by_lakshmaji' style='background-color:rgba(".rand(0,255).",".rand(0,255).",".rand(0,255).",1);'><a  href='choice.php?dummy=".base64_encode($table[0])."' class='text-uppercase win_by_lakshmaji' style='color:#fff;'>".$table[0]."</a></div>";
-								$break_line++;
-								if($break_line==4 || $break_line==8 || $break_line==12) 
-								{
-									echo "</div><div class='row'>";
-								}	
-							} 
-						}
-						else
-						{
-							echo 'Error displaying tables';
-						}
-
-					?>
-
-
-
-
-
-
-
-</div>
-</div>
-
-
-
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <?php require('./header.php');?>
+        <?php require('./side.php');?>
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+			<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"><?php echo $_SESSION["tblname"] ?></h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+			<div class="container-fluid">
+				<?php
+					$connection = new createConnection(); 			//created a new object
+					$connection_ref = $connection->connectToDatabase();
+					// $connection->selectDatabase();
+                    $sql = "SELECT table_name, table_rows, ENGINE, TABLE_COMMENT  FROM information_schema.tables WHERE table_schema = '".$_ENV['DB_DATABASE']."'";
+					$result = mysqli_query($connection_ref, $sql);
+					if($result) {
+				?>
+				<div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h4 class="card-title">Tables</h4>
+                                    <div class="ms-auto">
+                                        <div class="dropdown sub-dropdown">
+                                            <button class="btn btn-link text-muted dropdown-toggle" type="button" id="dd1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1" style="">
+                                                <a class="dropdown-item" href="#">Insert</a>
+                                                <a class="dropdown-item" href="#">Update</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table no-wrap v-middle mb-0">
+                                        <thead>
+                                            <tr class="border-0">
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Table
+                                                </th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">Description
+                                                </th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Team</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">
+                                                    Status
+                                                </th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">
+                                                    Total Records
+                                                </th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											<?php
+                                                $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+												$break_line=0;
+												while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result 	
+											?>
+											<tr class='border-top-0 px-2 py-4'>
+												<td class="border-top-0 px-2 py-4">
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="me-3">
+                                                        <div class="rounded-circle d-flex justify-content-center align-items-center bg-<?php echo $colors[array_rand($colors)]; ?> text-white" style="width: 50px; height: 50px;">
+                                                                <span class="h5 m-0">
+                                                                    <?php echo strtoupper(substr($table[0], 0, 1));?>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pl-2">
+                                                            <h5 class="text-dark mb-0 font-16 font-weight-medium">
+																<?php echo ucfirst($table[0]);?>
+															</h5>
+                                                            <span class="text-muted font-14"><?php echo $table[2] ?></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="border-top-0 text-muted px-2 py-4 font-14"><?php echo $table[3] ?></td>
+                                                <td class="border-top-0 px-2 py-4">
+                                                    <div class="popover-icon">
+                                                        <a class="btn btn-primary rounded-circle btn-circle font-12" href="javascript:void(0)">DS</a>
+                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item" href="javascript:void(0)">SS</a>
+                                                        <a class="btn btn-cyan rounded-circle btn-circle font-12 popover-item" href="javascript:void(0)">RP</a>
+                                                        <a class="btn btn-success text-white rounded-circle btn-circle font-20" href="javascript:void(0)">+</a>
+                                                    </div>
+                                                </td>
+                                                <td class="border-top-0 text-center px-2 py-4"><i class="fa fa-circle text-primary font-12" data-bs-toggle="tooltip" data-placement="top" aria-label="In Testing" data-bs-original-title="In Testing"></i></td>
+                                                <td class="border-top-0 text-center font-weight-medium text-muted px-2 py-4">
+                                                    <?php echo $table[1] ?>
+                                                </td>
+                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+													<?php
+														echo "<a href='choice.php?dummy=".base64_encode($table[0])."'>view</a>";
+													?>
+                                                </td>
+											</tr>
+											<?php
+													// echo "<tr class='border-top-0 px-2 py-4' style='background-color:rgba(".rand(0,255).",".rand(0,255).",".rand(0,255).",1);'><a  href='choice.php?dummy=".base64_encode($table[0])."' class='text-uppercase table_title_wrapper' style='color:#fff;'>".$table[0]."</a></div>";
+													$break_line++;
+													if($break_line==4 || $break_line==8 || $break_line==12) {
+														echo "</tr>";
+													}	
+												} 
+											?>
+										</tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<?php
+					} else {
+						echo 'Error displaying tables';
+					}
+				?>
+				
+			</div>
+			<!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+			<?php require('./footer.php');?>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="./assets/js/app-style-switcher.js"></script>
+    <script src="../assets/js/feather.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="./assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="./assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <!-- themejs -->
+    <!--Menu sidebar -->
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./assets/js/custom.min.js"></script>
 </body>
 </html>

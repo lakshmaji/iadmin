@@ -5,26 +5,34 @@ $connection = new createConnection(); 			//created a new object
 $connection_ref = $connection->connectToDatabase();
 // $connection->selectDatabase();				//selecting db
 
+$num_fields = $_SESSION['num_flds'];
+$selected_table_name = $_SESSION["tblname"];
+$current_row_id = $_SESSION["current_row_id"];
 
-$selected_table_name=$_SESSION["tblname"];
+// Construct the UPDATE query
+$str = "UPDATE ".$selected_table_name." SET ";
 
-
-   $wrecord = $_GET['wrecord'];
-   $wcolumn = $_GET['wcolumn'];
-   $wpm = $_GET['wvalue'];
+// Iterate over the POST data (assuming keys correspond to column names)
+foreach ($_POST as $column_name => $value) {
+   // Escape input to prevent SQL injection
+   $value = mysqli_real_escape_string($connection_ref, $value);
    
-   // Escape User Input to help prevent SQL Injection
-   $wrecord = mysqli_real_escape_string($connection_ref, $wrecord);
-   $wcolumn = mysqli_real_escape_string($connection_ref, $wcolumn);
-   $wpm = mysqli_real_escape_string($connection_ref, $wpm);
+   // Append each column and its value to the SET clause of the UPDATE query
+   $str .= "$column_name = '$value', ";
+}
 
-$allsel="select * from ".$selected_table_name;
-$res = mysqli_query($connection_ref, $allsel);
+// Remove the trailing comma and space
+$str = rtrim($str, ", ");
 
-$finfo = mysqli_fetch_field_direct( $res, $wcolumn);
-$fld_name = $finfo->name;
-$sql = "UPDATE ".$selected_table_name." SET ".$fld_name."='".$wpm."' WHERE id=".$wrecord;
+$str .= " WHERE id = ".$current_row_id;
+// Execute the UPDATE query
+$re_result = mysqli_query($connection_ref, $str);
 
-
-$a=mysqli_query($connection_ref, $sql);
+if($re_result === FALSE) {
+    die(mysqli_error($connection_ref)); // TODO: better error handling
+    // TODO: Use some session var to show failure notification
+} else {
+    // TODO: Use some session var to show success notification
+    header('Location: ./');
+}
 ?>

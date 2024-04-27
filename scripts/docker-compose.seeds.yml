@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  php:
+    container_name: demo_seeds_generation
+    build: .
+    volumes:
+      - .:/app

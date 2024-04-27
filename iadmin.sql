@@ -20,6 +20,12 @@ SET time_zone = "+00:00";
 -- Database: `iadmin`
 --
 
+DROP DATABASE IF EXISTS iadmin;
+
+CREATE DATABASE IF NOT EXISTS iadmin;
+
+USE iadmin;
+
 -- --------------------------------------------------------
 
 --
@@ -31,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `admin_log` (
   `username` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2  COMMENT="This is a current users table. Will be removed in future";
 
 --
 -- Dumping data for table `admin_log`
@@ -53,16 +59,46 @@ CREATE TABLE IF NOT EXISTS `MapData` (
   `lattitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `longitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 COMMENT="This is a table with rich content";
 
 --
 -- Dumping data for table `MapData`
 --
 
 INSERT INTO `MapData` (`id`, `name`, `description`, `lattitude`, `longitude`) VALUES
-(19, 'hyder', 'Birla Mandir<br>\nHill Fort Rd, Hyderabad, Telangana 500004<br>', '17.406287', '78.469095'),
-(20, 'hyderabad', '<img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" height="70" width="140"><br><p class="text-warning text-capitalize">hi lakshmaji</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
-(29, 'hyder', '<img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" width="140" height="70"><br><p class="text-warning text-capitalize">fghd</p>Mobile<strong>ddgh</strong><br><div class="label label-primary">OPENS AT :dfghdfh</div><div class="label label-success">CLOSED AT :dgh</div>', '17.450473', '78.380979');
+(13, 'hyder', 'Birla Mandir<br>\nHill Fort Rd, Hyderabad, Telangana 500004<br>', '17.406287', '78.469095'),
+(24, 'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(25,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(26,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(27,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(28,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(29,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(32,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(33,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(34,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(35,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(36,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(37,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(38,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(39,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(40,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(43,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(42,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(41,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(44,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(45,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(46,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(47,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(48,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(18,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(49,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(17,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(16,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(98,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(58,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(64,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(66,'hyderabad', '<img src="https://picsum.photos/800/300" height="70" width="140"><br><p class="text-warning text-capitalize">Hi Minion</p>Mobile<strong>88888</strong><br><div class="label label-primary">OPENS AT :7:50</div><div class="label label-success">CLOSED AT :9:59</div>', '17.454576', '78.384980'),
+(19,'hyder', '<img src="https://random.imagecdn.app/800/350" width="140" height="70"><br><p class="text-warning text-capitalize">fghd</p>Mobile<strong>ddgh</strong><br><div class="label label-primary">OPENS AT :dfghdfh</div><div class="label label-success">CLOSED AT :dgh</div>', '17.450473', '78.380979');
 
 -- --------------------------------------------------------
 
@@ -75,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `address` text COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14  COMMENT="This is a basic table";
 
 --
 -- Dumping data for table `test`
@@ -89,7 +125,7 @@ INSERT INTO `test` (`id`, `name`, `address`) VALUES
 (9, 'hi3', 'hi3'),
 (10, 'h6', 'h6'),
 (11, 'hu7', 'hu7'),
-(12, 'lakshmaji ', 'here is text area which is auto generate');
+(12, 'Minion ', 'here is text area which is auto generate');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

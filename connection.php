@@ -2,18 +2,26 @@
 
 class createConnection 				//create a class for make connection
 {
-    var $host="localhost";
-    var $username="root";    			// specify the sever details for mysql
-    Var $password="";
-    var $database="iadmin";
+    protected static $host;
+    protected static $username;
+    protected static $password;
+    protected static $database;
+    protected static $port ;
 
     var $myconn;
 
    
+    public function __construct() {
+        $this->host=$_ENV['DB_HOST'] ;
+        $this->username=$_ENV['DB_USER'];    			// specify the sever details for mysql
+        $this->password=$_ENV['DB_PASSWORD'];
+        $this->database=$_ENV['DB_DATABASE'];
+        $this->port = $_ENV['DB_PORT'];
+    }
 
     function connectToDatabase() 		// create a function for connect database
     {
-        $conn= mysqli_connect($this->host,$this->username,$this->password, $this->database);
+        $conn= mysqli_connect($this->host,$this->username,$this->password, $this->database, $this->port);
 
         if(!$conn)// testing the connection
         {

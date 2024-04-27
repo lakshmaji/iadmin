@@ -1,0 +1,31 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: dbcontainer
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: iadmin
+    volumes:
+      - .:/var/www/html
+
+  db:
+    container_name: dbcontainer
+    # platform: linux/x86_64
+    image: mysql:8.0.36
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iadmin
+      # MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3307:3306"
+    command: --init-file /docker-entrypoint-initdb.d/iadmin.sql
+    volumes:
+      - ./iadmin.sql:/docker-entrypoint-initdb.d/iadmin.sql
